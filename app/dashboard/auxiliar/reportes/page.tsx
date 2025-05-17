@@ -73,4 +73,56 @@ export default function ReportesPage() {
               const endX = 50 + 50 * Math.cos((endAngle * Math.PI) / 180)
               const endY = 50 + 50 * Math.sin((endAngle * Math.PI) / 180)
 
-              const pathData = `M 50 50 L ${startX} ${startY} A 50 50 0
+              const pathData = `M 50 50 L ${startX} ${startY} A 50 50 0 ${largeArcFlag} 1 ${endX} ${endY} Z`
+
+              return (
+                <path
+                  key={i}
+                  d={pathData}
+                  fill={colors[i]}
+                  stroke="white"
+                  strokeWidth="0.5"
+                />
+              )
+            })}
+          </svg>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-center">
+              <div className="text-2xl font-bold">{total}%</div>
+              <div className="text-sm text-gray-500">Total</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="space-y-6">
+      <h1 className="text-3xl font-bold">Reportes de Asistencia</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Gráfico de Asistencia de Alumnos */}
+        <div className="p-6 bg-white rounded-lg shadow">
+          <h2 className="text-xl font-semibold mb-4">Asistencia de Alumnos</h2>
+          {renderBarChart(
+            [datosAsistenciaSemanal.alumnos.presentes],
+            datosAsistenciaSemanal.labels,
+            "Presentes",
+            ["bg-green-500"]
+          )}
+        </div>
+
+        {/* Gráfico de Asistencia de Profesores */}
+        <div className="p-6 bg-white rounded-lg shadow">
+          <h2 className="text-xl font-semibold mb-4">Asistencia de Profesores</h2>
+          {renderBarChart(
+            [datosAsistenciaSemanal.profesores.presentes],
+            datosAsistenciaSemanal.labels,
+            "Presentes",
+            ["bg-blue-500"]
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}

@@ -247,13 +247,14 @@ export default function AsignarAlumnosPage() {
         </Link>
       </div>
 
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight">Asignar Alumnos</h1>
-        <p className="text-muted-foreground">
-          Administra los alumnos asignados al grupo {grupo.curso?.nombre} - {grupo.grado?.nombre}{" "}
-          {grupo.seccion?.nombre}
-        </p>
-      </div>
+      <Card>
+        <CardHeader>
+          <CardTitle>Asignar Alumnos - {grupo.nombre}</CardTitle>
+          <CardDescription>
+            Gestiona los alumnos asignados al grupo {grupo.nombre}
+          </CardDescription>
+        </CardHeader>
+      </Card>
 
       <Tabs defaultValue="asignados" className="space-y-4">
         <TabsList>
@@ -262,15 +263,29 @@ export default function AsignarAlumnosPage() {
         </TabsList>
 
         <TabsContent value="asignados" className="space-y-4">
-          <Card>
-            <CardHeader className="pb-3">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                <div className="flex flex-1 items-center space-x-2">
-                  <div className="relative flex-1">
-                    <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                    <Input
-                      type="search"
-                      placeholder="Buscar alumnos asignados..."
-                      className="pl-8"
-                      value={searchTermAsignados}
-                      onChange={(e) => setSearchTermAsignados(e.target.value\
+          <div className="flex items-center space-x-2">
+            <Search className="h-4 w-4 text-muted-foreground" />
+            <Input
+              placeholder="Buscar alumnos asignados..."
+              value={searchTermAsignados}
+              onChange={(e) => setSearchTermAsignados(e.target.value)}
+              className="h-8"
+            />
+          </div>
+        </TabsContent>
+
+        <TabsContent value="disponibles" className="space-y-4">
+          <div className="flex items-center space-x-2">
+            <Search className="h-4 w-4 text-muted-foreground" />
+            <Input
+              placeholder="Buscar alumnos disponibles..."
+              value={searchTermDisponibles}
+              onChange={(e) => setSearchTermDisponibles(e.target.value)}
+              className="h-8"
+            />
+          </div>
+        </TabsContent>
+      </Tabs>
+    </div>
+  )
+}
